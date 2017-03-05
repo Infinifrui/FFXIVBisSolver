@@ -191,7 +191,7 @@ namespace FFXIVBisSolverCLI
                         {
                             Console.WriteLine("\t" + kv.EquipSlotCategory.PossibleSlots.ElementAt(0) + ": " + kv);
                         }
-                        if (kv.EquipSlotCategory.Key == 12 && ring_count == 0) {
+                        if (kv.EquipSlotCategory.Key == 12 && ring_count == 0) { 
                             Console.WriteLine("\t" + kv.EquipSlotCategory.PossibleSlots.First() + ": " + kv); ring_count++;
                         }
                         else if (kv.EquipSlotCategory.Key == 12 && ring_count == 1){
