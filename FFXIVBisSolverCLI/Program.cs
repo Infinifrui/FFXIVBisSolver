@@ -185,10 +185,21 @@ namespace FFXIVBisSolverCLI
                     var solution = solver.Solve(model.Model);
                     model.ApplySolution(solution);
                     Console.WriteLine("Gear: ");
-                    model.ChosenGear.ForEach(kv => Console.WriteLine("\t" + kv.EquipSlotCategory.PossibleSlots.ElementAt(0) + ": " + kv));
+                    byte ring_count = 0;
+                    model.ChosenGear.ForEach(kv => {
+                        if (kv.EquipSlotCategory.Key != 12)
+                        {
+                            Console.WriteLine("\t" + kv.EquipSlotCategory.PossibleSlots.ElementAt(0) + ": " + kv);
+                        }
+                        if (kv.EquipSlotCategory.Key == 12 && ring_count == 0) {
+                            Console.WriteLine("\t" + kv.EquipSlotCategory.PossibleSlots.First() + ": " + kv); ring_count++;
+                        }
+                        else if (kv.EquipSlotCategory.Key == 12 && ring_count == 1){
+                            Console.WriteLine("\t" + kv.EquipSlotCategory.PossibleSlots.Last() + ": " + kv);
+                        }
+                    });
                     Console.WriteLine("Materia: ");
                     model.ChosenMateria.ForEach(kv => Console.WriteLine("\t" + kv.Item1 + ": " + kv.Item2 + ",\n\t\t - Materia: " + kv.Item3 + "\n\t\t\t   Amount: " + kv.Item4));
-                    //Console.WriteLine(model.ChosenMateria.ElementAt(0).Item2);
                     if (model.ChosenRelicStats.Any())
                     {
                         Console.WriteLine("Relic stats: ");
